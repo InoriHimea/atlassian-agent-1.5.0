@@ -6,7 +6,10 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.security.*;
+import java.security.KeyFactory;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.Signature;
 import java.security.spec.EncodedKeySpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
@@ -32,7 +35,7 @@ public class Encoder {
         }
     }
 
-    public static String encode(String licenseText) throws IOException, NoSuchAlgorithmException, InvalidKeyException, SignatureException {
+    public static String encode(String licenseText) throws Exception {
         byte[] licenseData = zipText(licenseText.getBytes());
         byte[] text = new byte[licenseData.length + 5];
         text[0] = 13;   // license prefix
@@ -42,11 +45,15 @@ public class Encoder {
         text[4] = 15;
         System.arraycopy(licenseData, 0, text, 5, licenseData.length);
 
+        return packLicense(text, sign(text));
+    }
+
+    public static byte[] sign(byte[] bytes) throws Exception {
         Signature signature = Signature.getInstance("SHA1withDSA");
         signature.initSign(PRIVATE_KEY);
-        signature.update(text);
+        signature.update(bytes);
 
-        return packLicense(text, signature.sign());
+        return signature.sign();
     }
 
     private static byte[] zipText(byte[] licenseText) throws IOException {

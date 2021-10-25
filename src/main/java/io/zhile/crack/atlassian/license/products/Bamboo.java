@@ -5,12 +5,17 @@ import io.zhile.crack.atlassian.license.LicenseProperty;
 
 /**
  * @author pengzhile
- * @link https://zhile.io
  * @version 1.0
+ * @link https://zhile.io
  */
 public class Bamboo extends LicenseProperty {
-    public Bamboo(String ContactName, String ContactEMail, String ServerID, String Organisation) {
-        super(ContactName, ContactEMail, ServerID, Organisation);
+    public Bamboo(String contactName, String contactEMail, String serverID, String organisation, boolean dataCenter) {
+        super(contactName, contactEMail, serverID, organisation, dataCenter);
+    }
+
+    @Override
+    public void init() {
+        super.init();
 
         setLicenseEdition(LicenseEdition.UNLIMITED);
         setNumberOfBambooLocalAgents(-1);
@@ -25,7 +30,7 @@ public class Bamboo extends LicenseProperty {
 
     @Override
     public void setNumberOfUsers(int numberOfUsers) {
-        //
+        // disabled
     }
 
     public void setLicenseEdition(LicenseEdition licenseEdition) {

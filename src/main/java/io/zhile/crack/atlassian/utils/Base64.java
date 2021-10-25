@@ -4,8 +4,8 @@ import javax.xml.bind.DatatypeConverter;
 
 /**
  * @author pengzhile
- * @link https://zhile.io
  * @version 1.0
+ * @link https://zhile.io
  */
 public class Base64 {
     public static byte[] decode(String val) {

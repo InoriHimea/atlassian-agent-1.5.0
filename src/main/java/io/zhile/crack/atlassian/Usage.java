@@ -10,10 +10,11 @@ import java.util.Map;
 
 /**
  * @author pengzhile
- * @link https://zhile.io
  * @version 1.0
+ * @link https://zhile.io
  */
 public class Usage {
+    private static final String VERSION = "v1.3.1";
     private static final Options OPTIONS = new Options();
     private static final Map<String, String> PRODUCTS = new HashMap<>(16);
     private static final String PRODUCTS_DESC;
@@ -31,8 +32,10 @@ public class Usage {
         PRODUCTS.put("jc", "JIRA Core");
         PRODUCTS.put("portfolio", "Portfolio plugin for JIRA");
         PRODUCTS.put("jsd", "JIRA Service Desk");
+        PRODUCTS.put("jsm", "JIRA Service Management");
         PRODUCTS.put("training", "Training plugin for JIRA");
         PRODUCTS.put("capture", "Capture plugin for JIRA");
+        PRODUCTS.put("*", "Third party plugin key, looks like: com.foo.bar");
 
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, String> entry : PRODUCTS.entrySet()) {
@@ -48,7 +51,7 @@ public class Usage {
 
     public static void main(String[] args) {
         String usage = "\n====================================================\n" +
-                "=======        Atlassian Crack Agent         =======\n" +
+                "=======     Atlassian Crack Agent " + VERSION + "     =======\n" +
                 "=======           https://zhile.io           =======\n" +
                 "=======          QQ Group: 30347511          =======\n" +
                 "====================================================\n\n";
@@ -83,9 +86,9 @@ public class Usage {
         formatter.printHelp("java -jar " + selfPath, OPTIONS, true);
 
         System.out.println("\n================================================================================");
-        System.out.println("\n# Crack agent usage: append -javaagent arg to system environment: CATALINA_OPTS.");
+        System.out.println("\n# Crack agent usage: append -javaagent arg to system environment: JAVA_OPTS.");
         System.out.println("# Example(execute this command or append it to setenv.sh/setenv.bat file): \n");
-        System.out.println("  export CATALINA_OPTS=\"-javaagent:" + selfPath + " ${CATALINA_OPTS}\"");
+        System.out.println("  export JAVA_OPTS=\"-javaagent:" + selfPath + " ${JAVA_OPTS}\"");
         System.out.println("\n# Then start your confluence/jira server.\n");
 
         System.exit(1);
@@ -119,41 +122,44 @@ public class Usage {
                 property = new TeamCalendars(contactName, contactEMail, serverID, organisation, dataCenter);
                 break;
             case "bamboo":
-                property = new Bamboo(contactName, contactEMail, serverID, organisation);
+                property = new Bamboo(contactName, contactEMail, serverID, organisation, dataCenter);
                 break;
             case "bitbucket":
                 property = new Bitbucket(contactName, contactEMail, serverID, organisation, dataCenter);
                 break;
             case "fisheye":
-                property = new FishEye(contactName, contactEMail, serverID, organisation);
+                property = new FishEye(contactName, contactEMail, serverID, organisation, dataCenter);
                 break;
             case "crucible":
-                property = new Crucible(contactName, contactEMail, serverID, organisation);
+                property = new Crucible(contactName, contactEMail, serverID, organisation, dataCenter);
                 break;
             case "crowd":
                 property = new Crowd(contactName, contactEMail, serverID, organisation, dataCenter);
                 break;
             case "jc":
-                property = new JIRACore(contactName, contactEMail, serverID, organisation);
+                property = new JIRACore(contactName, contactEMail, serverID, organisation, dataCenter);
                 break;
             case "portfolio":
                 property = new Portfolio(contactName, contactEMail, serverID, organisation, dataCenter);
                 break;
             case "jsd":
+            case "jsm":
                 property = new JIRAServiceDesk(contactName, contactEMail, serverID, organisation, dataCenter);
                 break;
             case "training":
-                property = new Training(contactName, contactEMail, serverID, organisation);
+                property = new Training(contactName, contactEMail, serverID, organisation, dataCenter);
                 break;
             case "capture":
-                property = new Capture(contactName, contactEMail, serverID, organisation);
+                property = new Capture(contactName, contactEMail, serverID, organisation, dataCenter);
                 break;
             default:
-                printUsage();
-                return;
+                property = new ThirdPlugin(contactName, contactEMail, serverID, organisation, dataCenter);
+                ((ThirdPlugin) property).setProductName(product);
+                break;
         }
 
         try {
+            property.init();
             String licenseCode = Encoder.encode(property.toString());
 
             System.out.println("Your license code(Don't copy this line!!!): \n");

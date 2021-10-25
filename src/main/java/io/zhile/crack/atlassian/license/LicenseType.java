@@ -2,8 +2,8 @@ package io.zhile.crack.atlassian.license;
 
 /**
  * @author pengzhile
- * @link https://zhile.io
  * @version 1.0
+ * @link https://zhile.io
  */
 public enum LicenseType {
     ACADEMIC,

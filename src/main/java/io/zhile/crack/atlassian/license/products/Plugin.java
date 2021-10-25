@@ -4,19 +4,20 @@ import io.zhile.crack.atlassian.license.LicenseProperty;
 
 /**
  * @author pengzhile
- * @link https://zhile.io
  * @version 1.0
+ * @link https://zhile.io
  */
 abstract public class Plugin extends LicenseProperty {
-    Plugin(String ContactName, String ContactEMail, String ServerID, String Organisation, boolean dataCenter) {
-        super(ContactName, ContactEMail, ServerID, Organisation, dataCenter);
+    public Plugin(String contactName, String contactEMail, String serverID, String organisation, boolean dataCenter) {
+        super(contactName, contactEMail, serverID, organisation, dataCenter);
+    }
+
+    @Override
+    public void init() {
+        super.init();
 
         setLicenseID(null);
         setEnterprise(true);
-    }
-
-    Plugin(String ContactName, String ContactEMail, String ServerID, String Organisation) {
-        this(ContactName, ContactEMail, ServerID, Organisation, false);
     }
 
     @Override
