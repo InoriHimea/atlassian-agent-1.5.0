@@ -8,6 +8,7 @@ import javax.xml.bind.DatatypeConverter;
  * @link https://zhile.io
  */
 public class Base64 {
+
     public static byte[] decode(String val) {
         return DatatypeConverter.parseBase64Binary(val);
     }

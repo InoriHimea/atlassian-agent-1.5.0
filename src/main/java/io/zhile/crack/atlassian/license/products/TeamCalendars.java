@@ -6,8 +6,17 @@ package io.zhile.crack.atlassian.license.products;
  * @link https://zhile.io
  */
 public class TeamCalendars extends Plugin {
-    public TeamCalendars(String contactName, String contactEMail, String serverID, String organisation, boolean dataCenter) {
-        super(contactName, contactEMail, serverID, organisation, dataCenter);
+
+    public TeamCalendars(String contactName,
+                         String contactEMail,
+                         String serverID,
+                         String organisation,
+                         boolean dataCenter) {
+        super(contactName,
+                contactEMail,
+                serverID,
+                organisation,
+                dataCenter);
     }
 
     @Override

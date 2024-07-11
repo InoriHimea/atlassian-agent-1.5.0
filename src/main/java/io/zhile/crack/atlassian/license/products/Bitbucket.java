@@ -8,8 +8,17 @@ import io.zhile.crack.atlassian.license.LicenseProperty;
  * @link https://zhile.io
  */
 public class Bitbucket extends LicenseProperty {
-    public Bitbucket(String contactName, String contactEMail, String serverID, String organisation, boolean dataCenter) {
-        super(contactName, contactEMail, serverID, organisation, dataCenter);
+
+    public Bitbucket(String contactName,
+                     String contactEMail,
+                     String serverID,
+                     String organisation,
+                     boolean dataCenter) {
+        super(contactName,
+                contactEMail,
+                serverID,
+                organisation,
+                dataCenter);
     }
 
     @Override

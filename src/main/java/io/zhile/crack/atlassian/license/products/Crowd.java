@@ -8,8 +8,17 @@ import io.zhile.crack.atlassian.license.LicenseProperty;
  * @link https://zhile.io
  */
 public class Crowd extends LicenseProperty {
-    public Crowd(String contactName, String contactEMail, String serverID, String organisation, boolean dataCenter) {
-        super(contactName, contactEMail, serverID, organisation, dataCenter);
+
+    public Crowd(String contactName,
+                 String contactEMail,
+                 String serverID,
+                 String organisation,
+                 boolean dataCenter) {
+        super(contactName,
+                contactEMail,
+                serverID,
+                organisation,
+                dataCenter);
     }
 
     @Override

@@ -6,9 +6,21 @@ package io.zhile.crack.atlassian.license.products;
  * @link https://zhile.io
  */
 public class Capture extends ThirdPlugin {
-    public Capture(String contactName, String contactEMail, String serverID, String organisation, boolean dataCenter) {
-        super(contactName, contactEMail, serverID, organisation, dataCenter);
 
-        setProductName("bonfire");
+    public Capture(String contactName,
+                   String contactEMail,
+                   String serverID,
+                   String organisation,
+                   boolean dataCenter) {
+        super(contactName,
+                contactEMail,
+                serverID,
+                organisation,
+                dataCenter);
+    }
+
+    @Override
+    public String getProductName() {
+        return "bonfire";
     }
 }

@@ -5,10 +5,7 @@ import io.zhile.crack.atlassian.utils.Base64;
 
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * @author pengzhile
@@ -16,8 +13,9 @@ import java.util.TreeSet;
  * @link https://zhile.io
  */
 abstract public class LicenseProperty {
+
     protected Date date = new Date();
-    protected Map<String, String> data = new HashMap<>(32);
+    protected Map<String, String> data = new LinkedHashMap<>(32);
 
     protected String contactName;
     protected String contactEMail;
@@ -27,7 +25,11 @@ abstract public class LicenseProperty {
 
     abstract public String getProductName();
 
-    public LicenseProperty(String contactName, String contactEMail, String serverID, String organisation, boolean dataCenter) {
+    public LicenseProperty(String contactName,
+                           String contactEMail,
+                           String serverID,
+                           String organisation,
+                           boolean dataCenter) {
         this.contactName = contactName;
         this.contactEMail = contactEMail;
         this.serverID = serverID;
@@ -49,7 +51,7 @@ abstract public class LicenseProperty {
         setLicenseID("LIDSEN-" + licenseId);
         setCreationDate(date);
         setLicenseType(LicenseType.COMMERCIAL);
-        setDescription("Unlimited license by https://zhile.io");
+        setDescription("Unlimited license by https://zhile.io And Remake By InoriAsuka");
         setEvaluation(false);
 
         setContactName(contactName);

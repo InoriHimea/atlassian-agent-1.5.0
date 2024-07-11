@@ -5,6 +5,8 @@ import io.zhile.crack.atlassian.license.LicenseProperty;
 import io.zhile.crack.atlassian.license.products.*;
 import org.apache.commons.cli.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +16,9 @@ import java.util.Map;
  * @link https://zhile.io
  */
 public class Usage {
-    private static final String VERSION = "v1.3.1";
+
+    private static final String VERSION = "v1.4.0";
+    private static final String TIME = LocalDateTime.of(2024, 7, 11, 14, 27).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     private static final Options OPTIONS = new Options();
     private static final Map<String, String> PRODUCTS = new HashMap<>(16);
     private static final String PRODUCTS_DESC;
@@ -54,6 +58,7 @@ public class Usage {
                 "=======     Atlassian Crack Agent " + VERSION + "     =======\n" +
                 "=======           https://zhile.io           =======\n" +
                 "=======          QQ Group: 30347511          =======\n" +
+                "=======      update in " + TIME + "      =======\n" +
                 "====================================================\n\n";
 
         System.out.print(usage);
