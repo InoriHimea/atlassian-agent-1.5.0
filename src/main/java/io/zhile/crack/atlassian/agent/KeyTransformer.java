@@ -150,7 +150,7 @@ public class KeyTransformer implements ClassFileTransformer {
                         $0.publicKeys.clear();
                         List keys = new ArrayList();
                     
-                        Map.Entry envEntry = $0.env.entrySet()
+                        Map.Entry envEntry = $0.env.entrySet();
                         for(Iterator iter = envEntry.iterator(); iter.hasNext();) {
                             Map.Entry envVar = (Map.Entry) iter.next();
                             String envVarKey = (String) envVar.getKey();
@@ -170,9 +170,10 @@ public class KeyTransformer implements ClassFileTransformer {
                         }
                     
                         // 使用替换后的公钥
-                        System.out.println("============================== agent working: replacing public keys ==============================");
+                        System.out.println("============================== agent working: load replacing public keys ==============================");
                         $0.loadKey(new Key("%s", PublicKeys.LICENSE_STRING_KEY_V2_VERSION, Key.Type.PUBLIC));
                         $0.loadKey(new Key("%s", PublicKeys.LICENSE_HASH_KEY_1600708331_VERSION, Key.Type.PUBLIC));
+                        System.out.println("============================== agent working: load replacing public keys ==============================");
                     }
                     """.formatted(LICENSE_STRING_KEY_V2, LICENSE_HASH_KEY_1600708331));
 
@@ -189,6 +190,10 @@ public class KeyTransformer implements ClassFileTransformer {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         URL path = classLoader.getResource("");
         URI uri = Objects.requireNonNull(path).toURI();
+
+        System.out.println("==========================路径信息：working dir==============================");
+        System.out.println(System.getProperty("user.dir"));
+        System.out.println("==========================路径信息：working dir==============================");
 
         File classpathFile = Path.of(uri).toFile();
         System.out.println("==========================路径信息：classpath==============================");
