@@ -1,5 +1,7 @@
-# Atlassian Agent v1.3.1
+# Atlassian Agent v1.5.0
  
+this is merge from https://github.com/gzh2001/atlassian-agent.git for KeyManger Class with Method reset
+
 #### Support (almost any version, include 8.0):
 * JIRA Software [FAQ](doc/JIRA_FAQ.md)
 * JIRA Core

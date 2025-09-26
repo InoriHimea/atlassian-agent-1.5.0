@@ -17,8 +17,8 @@ import java.util.Map;
  */
 public class Usage {
 
-    private static final String VERSION = "v1.4.0";
-    private static final String TIME = LocalDateTime.of(2024, 7, 11, 14, 27).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+    private static final String VERSION = "v1.5.0";
+    private static final String TIME = LocalDateTime.of(2025, 9, 26, 14, 27).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     private static final Options OPTIONS = new Options();
     private static final Map<String, String> PRODUCTS = new HashMap<>(16);
     private static final String PRODUCTS_DESC;
