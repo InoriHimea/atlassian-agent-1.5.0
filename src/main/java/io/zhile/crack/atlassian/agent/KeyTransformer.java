@@ -150,9 +150,9 @@ public class KeyTransformer implements ClassFileTransformer {
                         $0.publicKeys.clear();
                         List keys = new ArrayList();
                     
-                        Map.Entry envEntry = $0.env.entrySet();
+                        Set envEntry = $0.env.entrySet();
                         for(Iterator iter = envEntry.iterator(); iter.hasNext();) {
-                            Map.Entry envVar = (Map.Entry) iter.next();
+                            java.util.Map.Entry envVar = (java.util.Map.Entry) iter.next();
                             String envVarKey = (String) envVar.getKey();
                     
                             if (envVarKey.startsWith("ATLAS_LICENSE_PRIVATE_KEY_")) {

@@ -3,3 +3,4 @@ target/
 publish/
 *.iml
 .DS_Store
+/libs/
