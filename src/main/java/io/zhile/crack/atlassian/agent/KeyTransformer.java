@@ -89,7 +89,7 @@ public class KeyTransformer implements ClassFileTransformer {
                     "System.out.println(\"============================== agent working ==============================\");" +
                     "}");
 
-            cc.writeFile(new File("hack").getAbsolutePath());
+            cc.writeFile(new File(System.getProperty("user.dir"), "hack").getAbsolutePath());
 
             return cc.toBytecode();
         } catch (Exception e) {
@@ -123,7 +123,7 @@ public class KeyTransformer implements ClassFileTransformer {
                     }
                     """);
 
-            target.writeFile(new File("hack").getAbsolutePath());
+            target.writeFile(new File(System.getProperty("user.dir"), "hack").getAbsolutePath());
 
             return target.toBytecode();
         } catch (Exception e) {
@@ -151,7 +151,7 @@ public class KeyTransformer implements ClassFileTransformer {
                         List keys = new ArrayList();
                     
                         Map.Entry envEntry = $0.env.entrySet()
-                        for(Iterator iter = .iterator(); iter.hasNext();) {
+                        for(Iterator iter = envEntry.iterator(); iter.hasNext();) {
                             Map.Entry envVar = (Map.Entry) iter.next();
                             String envVarKey = (String) envVar.getKey();
                     
@@ -165,7 +165,7 @@ public class KeyTransformer implements ClassFileTransformer {
                         }
                     
                         for(Iterator it = keys.iterator(); it.hasNext();) {
-                            Key key = (Key)it.next();
+                            Key key = (Key) it.next();
                             $0.loadKey(key);
                         }
                     
@@ -176,7 +176,7 @@ public class KeyTransformer implements ClassFileTransformer {
                     }
                     """.formatted(LICENSE_STRING_KEY_V2, LICENSE_HASH_KEY_1600708331));
 
-            target.writeFile(new File("hack").getAbsolutePath());
+            target.writeFile(new File(System.getProperty("user.dir"), "hack").getAbsolutePath());
 
             return target.toBytecode();
         } catch (Exception e) {
