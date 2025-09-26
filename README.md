@@ -2,6 +2,27 @@
  
 this is merge from https://github.com/gzh2001/atlassian-agent.git for KeyManger Class with Method reset
 
+need set WorkingDirectory if you use Systemd:
+# jira
+    [Unit]
+    Description=Jira Issue & Project Tracking Software
+    After=network.target
+    #RequiresMountsFor=/data/atlassian/application-data/jira/shared-home
+    
+    [Service]
+    Type=forking
+    User=jira
+    Group=jira
+    PIDFile=/opt/atlassian/jira/11.0.1/work/jira.pid
+    WorkingDirectory=/opt/atlassian/jira/11.0.1
+    ExecStart=/opt/atlassian/jira/11.0.1/bin/start-jira.sh
+    ExecStop=/opt/atlassian/jira/11.0.1/bin/stop-jira.sh
+
+    [Install]
+    WantedBy=multi-user.target
+# bitbucket
+
+
 #### Support (almost any version, include 8.0):
 * JIRA Software [FAQ](doc/JIRA_FAQ.md)
 * JIRA Core
