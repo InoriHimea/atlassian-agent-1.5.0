@@ -10,8 +10,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.security.ProtectionDomain;
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @author pengzhile
@@ -111,6 +110,7 @@ public class KeyTransformer implements ClassFileTransformer {
             cp.importPackage("java.nio.charset");
             cp.importPackage("java.text");
             cp.importPackage("java.util");
+            cp.importPackage("java.time");
             cp.importPackage("org.apache.commons.codec.binary");
 
             CtClass target = cp.getCtClass(LICENSE_DECODER_PATH.replace("/", "."));
@@ -143,13 +143,15 @@ public class KeyTransformer implements ClassFileTransformer {
 
             CtClass target = cp.getCtClass(NEW_KEY_MANAGER.replace("/", "."));
             CtMethod reset = target.getDeclaredMethod("reset");
+
             reset.setBody("""
                     {
                         $0.privateKeys.clear();
                         $0.publicKeys.clear();
                         List keys = new ArrayList();
                     
-                        for(Iterator iter = this.env.entrySet().iterator(); iter.hasNext()) {
+                        Map.Entry envEntry = $0.env.entrySet()
+                        for(Iterator iter = .iterator(); iter.hasNext();) {
                             Map.Entry envVar = (Map.Entry) iter.next();
                             String envVarKey = (String) envVar.getKey();
                     
@@ -162,7 +164,7 @@ public class KeyTransformer implements ClassFileTransformer {
                             }
                         }
                     
-                        for(Iterator it = keys.iterator(); it.hasNext()) {
+                        for(Iterator it = keys.iterator(); it.hasNext();) {
                             Key key = (Key)it.next();
                             $0.loadKey(key);
                         }
